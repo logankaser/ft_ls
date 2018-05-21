@@ -4,7 +4,7 @@
 #include "libft.h"
 #include "ft_ls.h"
 
-void	iterate_directory(const char *path)
+void	iterate_directory(const char *path, t_list **directories)
 {
 	DIR* pwd;
 	t_vector files;
@@ -24,10 +24,14 @@ void	iterate_directory(const char *path)
 	i = 0;
 	while (i < files.length)
 		ft_putendl(((t_file*)files.data[i++])->info.d_name);
+	(void)directories;
 }
 
 int	main(void)
 {
+	t_list **directories;
+
+	directories = NULL;
 	iterate_directory(".", directories);
 	return (0);
 }

@@ -96,7 +96,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@ar rcs $@ $(OBJ)
-	@echo -e "\e[32;1mlibft.a Created\e[0m"
+	@printf "\e[32;1mlibft.a Created\e[0m\n"
 
 $(OBJ): $(SRC)
 	@gcc $(CFLAGS) -c $(SRC)
