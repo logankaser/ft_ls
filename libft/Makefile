@@ -1,5 +1,4 @@
-# **************************************************************************** #
-#                                                                              #
+# **************************************************************************** # #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
@@ -96,7 +95,8 @@ CFLAGS = -O3 -march=native -Wall -Wextra -Werror -I includes/
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@ar rcs $@ $(OBJ) && echo "\033[32;1mlibft.a Created\033[0m"
+	@ar rcs $@ $(OBJ)
+	@echo -e "\e[32;1mlibft.a Created\e[0m"
 
 $(OBJ): $(SRC)
 	@gcc $(CFLAGS) -c $(SRC)

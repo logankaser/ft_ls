@@ -31,9 +31,9 @@ LDFLAGS = -L libft -lft \
 all: $(OBJ_DIR) $(NAME)
 
 $(NAME): $(OBJ) libft/libft.a
-	@echo "\033[32;1mLinking.. \033[0m"
+	@echo -e "\e[32;1mLinking.. \e[0m"
 	@clang $(LDFLAGS) -o $@ $^
-	@echo "\033[32;1mCreated:\033[0m "$(NAME)
+	@echo -e "\e[32;1mCreated:\e[0m "$(NAME)
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
@@ -41,22 +41,22 @@ $(OBJ_DIR):
 -include $(DEP)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@echo "\033[34;1mCompiling: \033[0m"$<
+	@echo -e "\e[34;1mCompiling: \e[0m"$<
 	@clang $(CPPFLAGS) -MMD -c $< -o $@
 
 libft/libft.a:
-	@make -C libft
+	@make -sC libft
 
 clean:
-	@echo "\033[31;1mCleaning..\033[0m"
+	@echo -e "\e[31;1mCleaning..\e[0m"
 	@rm -f $(OBJ)
-	@make -C libft clean
+	@make -sC libft clean
 
 fclean:
-	@echo "\033[31;1mFull Cleaning..\033[0m"
+	@echo -e "\e[31;1mFull Cleaning..\e[0m"
 	@rm -rf $(OBJ_DIR)
 	@rm -f $(NAME)
-	@make -C libft fclean
+	@make -sC libft fclean
 
 re:	fclean all
 

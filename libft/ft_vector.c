@@ -49,7 +49,7 @@ void				*ft_vector_pop(t_vector* v)
 
 void				ft_vector_rm(t_vector* v)
 {
-	int i;	
+	unsigned i;	
 
 	i = 0;
 	while (i < v->length)
