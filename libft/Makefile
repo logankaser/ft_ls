@@ -30,6 +30,7 @@ ft_lstlen \
 ft_lstmap \
 ft_lstnew \
 ft_lstpush \
+ft_lstpop \
 ft_lstrm \
 ft_memalloc \
 ft_memccpy \
@@ -51,6 +52,7 @@ ft_putnbr_fd \
 ft_putstr \
 ft_putstr_fd \
 ft_putstrarray \
+ft_qsort \
 ft_strcat \
 ft_strchr \
 ft_strclr \
@@ -90,7 +92,7 @@ get_next_line
 SRC = $(addsuffix .c, $(LIST))
 OBJ = $(addsuffix .o, $(LIST))
 
-CFLAGS = -O3 -march=native -Wall -Wextra -Werror -I includes/
+CFLAGS = -g -O3 -march=native -Wall -Wextra -Werror -I includes/
 
 all: $(NAME)
 

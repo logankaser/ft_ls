@@ -12,6 +12,7 @@
 
 NAME = ft_ls
 LIST = main \
+sort
 
 SRC_DIR = src
 OBJ_DIR = obj
@@ -23,10 +24,10 @@ DEP = $(OBJ:%.o=%.d)
 CPPFLAGS = -Wall -Wextra -Werror \
 -I libft/includes \
 -g -O3 -march=native \
-#-fsanitize=undefined -fsanitize=address
+#-fsanitize=address -fsanitize=undefined \
 
 LDFLAGS = -L libft -lft \
-#-fsanitize=undefined -fsanitize=address
+#-fsanitize=address -fsanitize=undefined \
 
 all: $(OBJ_DIR) $(NAME)
 

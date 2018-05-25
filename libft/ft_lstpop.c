@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_lstadd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lkaser <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/18 18:45:43 by lkaser            #+#    #+#             */
-/*   Updated: 2017/11/16 14:51:00 by lkaser           ###   ########.fr       */
+/*   Created: 2017/09/21 19:50:45 by lkaser            #+#    #+#             */
+/*   Updated: 2017/10/13 11:54:38 by lkaser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdint.h>
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+void*	ft_lstpop(t_list **lst)
 {
-	unsigned char	*d;
-	const uint64_t	*sr;
-	uint64_t		*de;
+	t_list	*tmp;
+	void	*content;
 
-	d = dest;
-	while (n && n % 8)
+	content = NULL;
+	if (*lst)
 	{
-		--n;
-		d[n] = ((unsigned char*)src)[n];
+		tmp = *lst;
+		*lst = tmp->next;
+		content = tmp->content;
+		free(tmp);
 	}
-	n /= 8;
-	de = dest;
-	sr = src;
-	while (n)
-	{
-		--n;
-		de[n] = sr[n];
-	}
-	return (dest);
+	return content;
 }

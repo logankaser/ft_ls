@@ -10,11 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "libft.h"
 
-#define COMPARE(a, b) ((struct s_player*)a)->score > ((struct s_player*)b)->score
-
-static int partition(void *array[], int lo , int hi)
+static int partition(void *array[], int lo, int hi,
+	t_bool (*comp)(const void *, const void *))
 {
 	void *pivot;
 	int i;
@@ -27,10 +26,10 @@ static int partition(void *array[], int lo , int hi)
 	while (1)
 	{
 		++i;
-		while (COMPARE(pivot, array[i]))
+		while (comp(pivot, array[i]))
 			++i;
 		--j;
-		while (COMPARE(array[j], pivot))
+		while (comp(array[j], pivot))
 			--j;
 		if (i >= j)
 			return j;
@@ -40,21 +39,19 @@ static int partition(void *array[], int lo , int hi)
 	}
 }
 
-static void sort(void *array[], int lo, int hi)
+static void sort(void *array[], int lo, int hi,
+	t_bool (*comp)(const void *, const void *))
 {
 	if (lo < hi)
 	{
-		int p = partition(array, lo, hi);
-		sort(array, lo, p);
-		sort(array, p + 1, hi);
+		int p = partition(array, lo, hi, comp);
+		sort(array, lo, p, comp);
+		sort(array, p + 1, hi, comp);
 	}
 }
 
-void quickSort(struct s_player** players)
+void ft_qsort(void *array[], int size,
+	t_bool (*comp)(const void *, const void *))
 {
-	int len = 0;
-	while (players[len])
-		++len;
-	--len;
-	sort((void**)players, 0, len);
+	sort(array, 0, size - 1, comp);
 }

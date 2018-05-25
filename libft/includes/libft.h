@@ -1,5 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
+/* ************************************************************************** */ /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
@@ -124,8 +123,9 @@ void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 
 void				*ft_lstpush(t_list **lst, void *content, size_t size);
+void				*ft_lstpop(t_list **lst);
 t_list				*ft_lstfind(t_list *lst,
-					char (*pred)(const void *, const void *), const void *data);
+					t_bool (*pred)(const void *, const void *), const void *data);
 void				ft_lstrm(t_list **lst, t_list *to_rm);
 
 /*
@@ -178,5 +178,13 @@ typedef	struct		s_fileinfo
 	long			fill;
 	char			buff[GNL_BUFF + 1];
 }					t_fileinfo;
+
+/*
+** Sorting.
+*/
+
+typedef				t_bool (*t_compare)(const void *, const void *);
+
+void				ft_qsort(void *array[], int size, t_compare);
 
 #endif
