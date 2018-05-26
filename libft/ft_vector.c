@@ -1,16 +1,28 @@
-#include "libft.h" 
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_vector.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lkaser <lkaser@student.42.us.org>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/05/25 17:34:45 by lkaser            #+#    #+#             */
+/*   Updated: 2018/05/25 17:36:51 by lkaser           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void				ft_vector_init(t_vector* v)
+#include "libft.h"
+
+void				ft_vector_init(t_vector *v)
 {
 	v->data = malloc(sizeof(void*));
 	v->capacity = 1;
 	v->length = 0;
 }
 
-void				ft_vector_resize(t_vector* v, unsigned size)
+void				ft_vector_resize(t_vector *v, unsigned size)
 {
-	void **new;
-	unsigned i;
+	void		**new;
+	unsigned	i;
 
 	if (size > v->length)
 	{
@@ -27,7 +39,7 @@ void				ft_vector_resize(t_vector* v, unsigned size)
 	}
 }
 
-void				ft_vector_push(t_vector* v, void *d)
+void				ft_vector_push(t_vector *v, void *d)
 {
 	if (v->length < v->capacity)
 		v->data[v->length++] = d;
@@ -38,19 +50,19 @@ void				ft_vector_push(t_vector* v, void *d)
 	}
 }
 
-void				*ft_vector_pop(t_vector* v)
+void				*ft_vector_pop(t_vector *v)
 {
 	void **item;
 
 	item = NULL;
 	if (v->length > 0)
 		item = v->data[--v->length];
-	return item;
+	return (item);
 }
 
-void				ft_vector_rm(t_vector* v)
+void				ft_vector_rm(t_vector *v)
 {
-	unsigned i;	
+	unsigned	i;
 
 	i = 0;
 	while (i < v->length)

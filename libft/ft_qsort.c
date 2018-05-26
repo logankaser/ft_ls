@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quickSort.c                                        :+:      :+:    :+:   */
+/*   ft_qsort.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lkaser <lkaser@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 19:48:59 by lkaser            #+#    #+#             */
-/*   Updated: 2018/04/26 11:09:14 by lkaser           ###   ########.fr       */
+/*   Updated: 2018/05/25 17:47:54 by lkaser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int partition(void *array[], int lo, int hi,
+static int	partition(void *array[], int lo, int hi,
 	t_bool (*comp)(const void *, const void *))
 {
-	void *pivot;
-	int i;
-	int j;
-	void *tmp;
+	void	*pivot;
+	int		i;
+	int		j;
+	void	*tmp;
 
 	pivot = array[lo + (hi - lo) / 2];
 	i = lo - 1;
@@ -32,25 +32,27 @@ static int partition(void *array[], int lo, int hi,
 		while (comp(array[j], pivot))
 			--j;
 		if (i >= j)
-			return j;
+			return (j);
 		tmp = array[i];
 		array[i] = array[j];
 		array[j] = tmp;
 	}
 }
 
-static void sort(void *array[], int lo, int hi,
+static void	sort(void *array[], int lo, int hi,
 	t_bool (*comp)(const void *, const void *))
 {
+	int	p;
+
 	if (lo < hi)
 	{
-		int p = partition(array, lo, hi, comp);
+		p = partition(array, lo, hi, comp);
 		sort(array, lo, p, comp);
 		sort(array, p + 1, hi, comp);
 	}
 }
 
-void ft_qsort(void *array[], int size,
+void		ft_qsort(void *array[], int size,
 	t_bool (*comp)(const void *, const void *))
 {
 	sort(array, 0, size - 1, comp);

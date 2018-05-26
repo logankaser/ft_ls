@@ -1,11 +1,12 @@
-/* ************************************************************************** */ /*                                                                            */
+/* ************************************************************************** */
+/*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkaser <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lkaser <lkaser@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/18 11:03:56 by lkaser            #+#    #+#             */
-/*   Updated: 2018/01/04 14:44:15 by lkaser           ###   ########.fr       */
+/*   Updated: 2018/05/25 18:17:50 by lkaser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +32,7 @@
 # define OTHERWISE(a) else a
 # define FT_ITOA_BASE(nbr, base) ft_itoa_base(nbr, base, sizeof base - 1)
 # define FT_UTOA_BASE(nbr, base) ft_utoa_base(nbr, base, sizeof base - 1)
+# define ZERO(z) z = {0}
 
 /*
 ** Memory.
@@ -104,6 +106,8 @@ void				ft_putstr_fd(char const *s, int fd);
 void				ft_putendl_fd(char const *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 
+typedef t_bool		(*t_compare)(const void *, const void *);
+
 /*
 ** Linked lists.
 */
@@ -124,8 +128,7 @@ t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 
 void				*ft_lstpush(t_list **lst, void *content, size_t size);
 void				*ft_lstpop(t_list **lst);
-t_list				*ft_lstfind(t_list *lst,
-					t_bool (*pred)(const void *, const void *), const void *data);
+t_list				*ft_lstfind(t_list *lst, t_compare pred, const void *data);
 void				ft_lstrm(t_list **lst, t_list *to_rm);
 
 /*
@@ -139,10 +142,10 @@ typedef struct		s_vector
 	unsigned		capacity;
 }					t_vector;
 
-void				ft_vector_init(t_vector* v);
-void				ft_vector_resize(t_vector* v, unsigned size);
-void				ft_vector_push(t_vector* v, void *d);
-void				ft_vector_rm(t_vector* v);
+void				ft_vector_init(t_vector *v);
+void				ft_vector_resize(t_vector *v, unsigned size);
+void				ft_vector_push(t_vector *v, void *d);
+void				ft_vector_rm(t_vector *v);
 
 /*
 ** Pair.
@@ -183,14 +186,12 @@ typedef	struct		s_fileinfo
 ** Sorting.
 */
 
-typedef				t_bool (*t_compare)(const void *, const void *);
-
-void				ft_qsort(void *array[], int size, t_compare);
+void				ft_qsort(void *array[], int size, t_compare pred);
 
 /*
 ** Printf
 */
 
-int                     ft_printf(char *format, ...);
+int					ft_printf(char *format, ...);
 
 #endif

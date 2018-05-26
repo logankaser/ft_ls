@@ -6,7 +6,7 @@
 #    By: logan  <logan@42.us.org>                   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/13 10:03:24 by logan             #+#    #+#              #
-#    Updated: 2018/05/08 18:59:19 by twalton          ###   ########.fr        #
+#    Updated: 2018/05/25 19:32:35 by lkaser           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ libft/libft.a:
 
 clean:
 	@printf "\e[31;1mCleaning..\e[0m\n"
-	@rm -f $(OBJ)
+	@rm -f $(OBJ) $(DEP)
 	@make -sC libft clean
 
 fclean:
