@@ -1,4 +1,5 @@
 #include "libft.h" 
+
 void				ft_vector_init(t_vector* v)
 {
 	v->data = malloc(sizeof(void*));

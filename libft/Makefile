@@ -87,7 +87,9 @@ ft_toupper \
 ft_utoa_base \
 ft_wchar_utf8 \
 ft_vector \
-get_next_line
+get_next_line \
+ft_printf \
+format
 
 SRC = $(addsuffix .c, $(LIST))
 OBJ = $(addsuffix .o, $(LIST))

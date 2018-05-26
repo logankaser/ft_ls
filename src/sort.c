@@ -1,6 +1,5 @@
 #include "ft_ls.h"
 
-#define FILE(x) ((t_file*)x)
 
 t_bool sort_ascii(const void *a, const void *b)
 {

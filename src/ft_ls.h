@@ -3,9 +3,12 @@
 #include <dirent.h>
 #include "libft.h"
 
+#define FILE(x) ((t_file*)x)
+
 typedef struct		s_file
 {
 	char			name[NAME_MAX + 1];
+	char			*path;
 	struct stat 	meta;
 }					t_file;
 

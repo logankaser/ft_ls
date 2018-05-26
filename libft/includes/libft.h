@@ -187,4 +187,10 @@ typedef				t_bool (*t_compare)(const void *, const void *);
 
 void				ft_qsort(void *array[], int size, t_compare);
 
+/*
+** Printf
+*/
+
+int                     ft_printf(char *format, ...);
+
 #endif

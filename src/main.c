@@ -11,44 +11,73 @@ static t_compare g_sorts[2][2] = {
 	{sort_time, sort_time_r}
 };
 
-void	iterate_directory(const char *path, t_list **dirs, int opts[])
+static char	*absolute_path(const char *dir, const char *file)
 {
-	DIR				*pwd;
-	t_vector		files;
-	struct dirent	*info;
-	unsigned		i;
-	char			*tmp;
-	t_file*			file;
+	int		dir_len;
+	int		file_len;
+	int		i;
+	char	*absolute;
 
-	tmp = ft_strjoin(path, "/");
-	ft_vector_init(&files);
-	if (!(pwd = opendir(path)))
-	{
-		perror("ft_ls");
-		return;
-	}
-	errno = 0;
-	while ((info = readdir(pwd)))
-	{
-		if (info->d_name[0] == '.' && !opts['a'])
-			continue;
-		file = malloc(sizeof(t_file));
-		ft_memcpy(file->name, info->d_name, NAME_MAX);
-		lstat(ft_strjoin(tmp, info->d_name), &(file->meta));
-		ft_vector_push(&files, file);
-	}
+	dir_len = ft_strlen(dir);
+	file_len = ft_strlen(file);
+	absolute = malloc(dir_len + file_len + 1);
+	i = -1;
+	while (++i < dir_len)
+		absolute[i] = dir[i];
+	absolute[i] = '/';
+	i = -1;
+	while (++i < file_len)
+		absolute[i + dir_len + 1] = file[i];
+	absolute[i + dir_len + 1] = '\0';
+	return absolute;
+}
+
+static void print_files(t_vector files, t_list *dirs[], int blocks, int opts[])
+{
+	t_file*		file;
+	unsigned	i;
+
+
 	ft_qsort(files.data, files.length, g_sorts[opts['t']][opts['r']]);
+	opts['l'] && ft_printf("total %u\n", blocks);
 	i = 0;
 	while (i < files.length)
 	{
 		file = files.data[i];
 		ft_putendl(file->name);
 		if (S_ISDIR(file->meta.st_mode))
-			ft_lstpush(dirs, ft_strjoin(tmp, file->name), 0);
+			ft_lstpush(dirs, file->path, 0);
 		++i;
 	}
-	free(tmp);
 	ft_vector_rm(&files);
+}
+
+static void	iterate_directory(const char *path, t_list *dirs[], int opts[])
+{
+	DIR				*pwd;
+	t_vector		ls;
+	struct dirent	*info;
+	unsigned		blocks;
+
+	ft_vector_init(&ls);
+	if (!(pwd = opendir(path)))
+	{
+		perror("ft_ls");
+		return;
+	}
+	blocks = 0;
+	while ((info = readdir(pwd)))
+	{
+		if (info->d_name[0] == '.' && !opts['a'])
+			continue;
+		ft_vector_push(&ls, malloc(sizeof(t_file)));
+		ft_memcpy(FILE(ls.data[ls.length - 1])->name, info->d_name, NAME_MAX);
+		FILE(ls.data[ls.length - 1])->path = absolute_path(path, info->d_name);
+		lstat(FILE(ls.data[ls.length - 1])->path,
+			&(FILE(ls.data[ls.length - 1])->meta));
+		blocks += FILE(ls.data[ls.length - 1])->meta.st_blocks;
+	}
+	print_files(ls, dirs, blocks, opts);
 	closedir(pwd);
 }
 
