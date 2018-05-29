@@ -16,6 +16,8 @@
 #include <string.h>
 #include <errno.h>
 #include <stdint.h>
+#include <pwd.h>
+#include <grp.h>
 
 #include "ft_ls.h"
 
@@ -45,6 +47,24 @@ static char			*absolute_path(const char *dir, const char *file)
 	return (absolute);
 }
 
+static char	*permissions(unsigned mode)
+{
+	static char	perms[11];
+
+	ft_strcpy(perms, "----------");
+	S_ISDIR(mode) && (perms[0] = 'd');
+	mode & S_IRUSR && (perms[1] = 'r');
+	mode & S_IWUSR && (perms[2] = 'w');
+	mode & S_IXUSR && (perms[3] = 'x');
+	mode & S_IRGRP && (perms[4] = 'r');
+	mode & S_IWGRP && (perms[5] = 'w');
+	mode & S_IXGRP && (perms[6] = 'x');
+	mode & S_IROTH && (perms[7] = 'r');
+	mode & S_IWOTH && (perms[8] = 'w');
+	mode & S_IXOTH && (perms[9] = 'x');
+	return perms;
+}
+
 static void			print_files(t_vector files,
 	t_list **dirs, int blocks, uint8_t opts[])
 {
@@ -57,12 +77,17 @@ static void			print_files(t_vector files,
 	while (i < files.length)
 	{
 		file = files.data[i];
-		ft_putendl(file->name);
+		if (opts['l'])
+			ft_printf("%s %4u %s  %s %6u %s\n", permissions(file->meta.st_mode), file->meta.st_nlink,
+			getpwuid(file->meta.st_uid)->pw_name, getgrgid(file->meta.st_gid)->gr_name, file->meta.st_size, file->name);
+		else
+			ft_printf("%s\t", file->name);
 		if (S_ISDIR(file->meta.st_mode))
 			ft_lstpush(dirs, file->path, 0);
 		++i;
 	}
 	ft_vector_rm(&files);
+	!opts['l'] && write(1, "\n", 1);
 }
 
 static void			iter_dir(const char *path, t_list **dirs, uint8_t opts[])
@@ -106,16 +131,14 @@ int					main(int argc, char **argv)
 	while (--argc > 0)
 		if (argv[argc][(i = 0)] == '-')
 			while (argv[argc][++i])
-				options[(int)argv[argc][i]] = 1;
+				options[(uint8_t)argv[argc][i]] = 1;
 	dir = NULL;
 	iter_dir(path ? path : ".", &dir, options);
 	if (!options['R'])
 		return (0);
 	while ((path = ft_lstpop(&dir)))
 	{
-		ft_putstr("\033[34;1m");
-		ft_putstr(path);
-		ft_putendl("\033[0m");
+		ft_printf("\n%s", path);
 		iter_dir(path, &dir, options);
 		free(path);
 		path = NULL;

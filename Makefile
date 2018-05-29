@@ -24,10 +24,10 @@ DEP = $(OBJ:%.o=%.d)
 CPPFLAGS = -Wall -Wextra -Werror \
 -I libft/includes \
 -g -O3 -march=native \
-#-fsanitize=address -fsanitize=undefined \
+-fsanitize=address -fsanitize=undefined \
 
 LDFLAGS = -L libft -lft \
-#-fsanitize=address -fsanitize=undefined \
+-fsanitize=address -fsanitize=undefined \
 
 all: $(OBJ_DIR) $(NAME)
 

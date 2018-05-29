@@ -13,24 +13,16 @@
 #include <stdint.h>
 #include "libft.h"
 
-void	ft_bzero(void *m, size_t size)
+void	ft_bzero(void *m, size_t n)
 {
-	unsigned bit;
+	uint8_t		*b8;
+	uint64_t	*b64;
 
-	bit = 0;
-	if (!(size % 8))
-	{
-		size /= 8;
-		while (bit < size)
-			((uint64_t*)m)[bit++] = 0;
-	}
-	else if (!(size % 4))
-	{
-		size /= 4;
-		while (bit < size)
-			((uint32_t*)m)[bit++] = 0;
-	}
-	else
-		while (bit < size)
-			((uint8_t*)m)[bit++] = 0;
+	b8 = m;
+	while (n && n % 8)
+		b8[n--] = 0;
+	n /= 8;
+	b64 = m;
+	while (n)
+		b8[n--] = 0;
 }
