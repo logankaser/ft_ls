@@ -6,7 +6,7 @@
 /*   By: lkaser <lkaser@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 17:49:40 by lkaser            #+#    #+#             */
-/*   Updated: 2018/05/25 19:31:34 by lkaser           ###   ########.fr       */
+/*   Updated: 2018/05/28 18:15:31 by lkaser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <stdint.h>
 #include <pwd.h>
 #include <grp.h>
+#include <time.h>
 
 #include "ft_ls.h"
 
@@ -47,22 +48,22 @@ static char			*absolute_path(const char *dir, const char *file)
 	return (absolute);
 }
 
-static char	*permissions(unsigned mode)
+static char			*perms(unsigned mode)
 {
-	static char	perms[11];
+	static char	p[11];
 
-	ft_strcpy(perms, "----------");
-	S_ISDIR(mode) && (perms[0] = 'd');
-	mode & S_IRUSR && (perms[1] = 'r');
-	mode & S_IWUSR && (perms[2] = 'w');
-	mode & S_IXUSR && (perms[3] = 'x');
-	mode & S_IRGRP && (perms[4] = 'r');
-	mode & S_IWGRP && (perms[5] = 'w');
-	mode & S_IXGRP && (perms[6] = 'x');
-	mode & S_IROTH && (perms[7] = 'r');
-	mode & S_IWOTH && (perms[8] = 'w');
-	mode & S_IXOTH && (perms[9] = 'x');
-	return perms;
+	ft_strcpy(p, "----------");
+	S_ISDIR(mode) && (p[0] = 'd');
+	mode & S_IRUSR && (p[1] = 'r');
+	mode & S_IWUSR && (p[2] = 'w');
+	mode & S_IXUSR && (p[3] = 'x');
+	mode & S_IRGRP && (p[4] = 'r');
+	mode & S_IWGRP && (p[5] = 'w');
+	mode & S_IXGRP && (p[6] = 'x');
+	mode & S_IROTH && (p[7] = 'r');
+	mode & S_IWOTH && (p[8] = 'w');
+	mode & S_IXOTH && (p[9] = 'x');
+	return (p);
 }
 
 static void			print_files(t_vector files,
@@ -70,21 +71,26 @@ static void			print_files(t_vector files,
 {
 	t_file		*file;
 	unsigned	i;
+	char		*time;
 
 	ft_qsort(files.data, files.length, g_sorts[opts['t']][opts['r']]);
 	opts['l'] && ft_printf("total %u\n", blocks);
 	i = 0;
 	while (i < files.length)
 	{
-		file = files.data[i];
+		file = files.data[i++];
 		if (opts['l'])
-			ft_printf("%s %4u %s  %s %6u %s\n", permissions(file->meta.st_mode), file->meta.st_nlink,
-			getpwuid(file->meta.st_uid)->pw_name, getgrgid(file->meta.st_gid)->gr_name, file->meta.st_size, file->name);
+		{
+			time = ctime(&file->meta.st_mtime);
+			time[19] = '\0';
+			ft_printf("%s %4u %s  %s %6u %s %s\n", perms(file->meta.st_mode),
+				file->meta.st_nlink, getpwuid(file->meta.st_uid)->pw_name,
+				getgrgid(file->meta.st_gid)->gr_name, file->meta.st_size,
+				time, file->name);
+		}
 		else
 			ft_printf("%s\t", file->name);
-		if (S_ISDIR(file->meta.st_mode))
-			ft_lstpush(dirs, file->path, 0);
-		++i;
+		S_ISDIR(file->meta.st_mode) && ft_lstpush(dirs, file->path, 0);
 	}
 	ft_vector_rm(&files);
 	!opts['l'] && write(1, "\n", 1);
