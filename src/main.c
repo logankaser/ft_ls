@@ -83,14 +83,14 @@ static void			print_files(t_vector files,
 		{
 			time = ctime(&file->meta.st_mtime);
 			time[19] = '\0';
-			ft_printf("%s %4u %s  %s %6u %s %s\n", perms(file->meta.st_mode),
+			ft_printf("%s %4u %s  %s %6lli %s %s\n", perms(file->meta.st_mode),
 				file->meta.st_nlink, getpwuid(file->meta.st_uid)->pw_name,
 				getgrgid(file->meta.st_gid)->gr_name, file->meta.st_size,
 				time, file->name);
 		}
 		else
 			ft_printf("%s\t", file->name);
-		S_ISDIR(file->meta.st_mode) && ft_lstpush(dirs, file->path, 0);
+		(S_ISDIR(file->meta.st_mode) && opts['R']) && ft_lstpush(dirs, file->path, 0);
 	}
 	ft_vector_rm(&files);
 	!opts['l'] && write(1, "\n", 1);
@@ -115,7 +115,7 @@ static void			iter_dir(const char *path, t_list **dirs, uint8_t opts[])
 		if (info->d_name[0] == '.' && !opts['a'])
 			continue;
 		ft_vector_push(&ls, malloc(sizeof(t_file)));
-		ft_memcpy(FILE(ls.data[ls.length - 1])->name, info->d_name, NAME_MAX);
+		ft_strcpy(FILE(ls.data[ls.length - 1])->name, info->d_name);
 		FILE(ls.data[ls.length - 1])->path = absolute_path(path, info->d_name);
 		lstat(FILE(ls.data[ls.length - 1])->path,
 			&(FILE(ls.data[ls.length - 1])->meta));
@@ -140,11 +140,9 @@ int					main(int argc, char **argv)
 				options[(uint8_t)argv[argc][i]] = 1;
 	dir = NULL;
 	iter_dir(path ? path : ".", &dir, options);
-	if (!options['R'])
-		return (0);
 	while ((path = ft_lstpop(&dir)))
 	{
-		ft_printf("\n%s", path);
+		ft_printf("\n%s:\n", path);
 		iter_dir(path, &dir, options);
 		free(path);
 		path = NULL;

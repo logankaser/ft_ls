@@ -93,7 +93,7 @@ unsigned	read_num(char **f)
 	return (num);
 }
 
-static void	format_parse(char **f, va_list args, size_t *len)
+static void	format_parse(char **f, va_list args, t_string *s)
 {
 	t_printf	pf;
 
@@ -117,50 +117,51 @@ static void	format_parse(char **f, va_list args, size_t *len)
 	MATCH(pf.len, ++*f);
 	MATCH(ANY2(pf.len, l_hh, l_ll), ++*f);
 	parse_specifiers(&pf, f);
-	format_print(pf, len);
+	format_print(pf, s);
 }
 
-static void	format_iter(char *f, va_list args, size_t *len)
+static t_string	format_iter(char *f, va_list args)
 {
-	size_t d;
+	size_t		d;
+	t_string	s;
 
+	ft_string_init(&s);
 	d = 0;
 	while (f[d])
 	{
 		if (f[d] == '%' && f[d + 1] == '%')
 		{
-			write(1, f, ++d);
-			*len += d;
+			ft_string_appendn(&s, f, ++d);
 			f += ++d;
 			d = 0;
 		}
 		else if (f[d] == '%')
 		{
-			write(1, f, d);
+			ft_string_appendn(&s, f, d);
 			f += d + 1;
-			format_parse(&f, args, len);
-			*len += d;
+			format_parse(&f, args, &s);
 			d = 0;
 		}
 		else
 			d += f[d] != 0;
 	}
-	write(1, f, d);
-	*len += d;
+	ft_string_appendn(&s, f, d);
+	return	(s);
 }
 
 int			ft_printf(char *format, ...)
 {
-	va_list	args;
-	size_t	len;
+	va_list		args;
+	t_string	s;
 
 	if (format)
 	{
 		va_start(args, format);
-		len = 0;
-		format_iter(format, args, &len);
+		s = format_iter(format, args);
 		va_end(args);
-		return (len);
+		write(1, s.content, s.length);
+		free(s.content);
+		return (s.length);
 	}
 	return (0);
 }

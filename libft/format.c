@@ -66,29 +66,33 @@ static uintmax_t	apply_length(t_printf pf)
 
 static char			*wchar_to_str(wchar_t wc)
 {
-	char *str;
+	static char str[8];
 
-	str = ft_strnew(sizeof(wchar_t) + 1);
+	ft_bzero(str, 8);
 	*((wchar_t *)str) = wc;
-	return (str);
+	return str;
 }
 
-static void			handle_char(t_printf pf, size_t *len)
+static char			*char_to_str(int c)
 {
-	ft_putchar(pf.data.i);
-	++*len;
+	static char str[8];
+
+	ft_bzero(str, 8);
+	*((int*)str) = c;
+	return str;
 }
 
-void				format_print(t_printf pf, size_t *len)
+
+void				format_print(t_printf pf, t_string *s)
 {
-	char		*str;
 	uintmax_t	nbr;
+	char 		*str;
 
 	nbr = pf.type >= t_ptr ? apply_length(pf) : 0;
 	MATCH(pf.type == t_wstr, str = ft_wchar_utf8(pf.data.wstr));
 	OR(pf.type == t_wchar, str = wchar_to_str(pf.data.wc));
 	OR(pf.type == t_str, str = pf.data.str);
-	OR(pf.type == t_char, handle_char(pf, len));
+	OR(pf.type == t_char, char_to_str(pf.data.i));
 	OR(pf.type == t_int, str = FT_ITOA_BASE(nbr, "0123456789"));
 	OR(pf.type == t_uint, str = FT_UTOA_BASE(nbr, "0123456789"));
 	OR(pf.type == t_hex, str = FT_UTOA_BASE(nbr, "0123456789abcdef"));
@@ -99,9 +103,8 @@ void				format_print(t_printf pf, size_t *len)
 	{
 		if (pf.type > t_wstr)
 			handle_flags(pf, &str, nbr);
-		ft_putstr(str ? str : "(null)");
-		*len += str ? ft_strlen(str) : 6;
-		if (pf.type != t_str)
+		ft_string_append(s, str ? str : "(null)");
+		if (pf.type != t_str && pf.type != t_char && pf.type != t_wchar)
 			free(str);
 	}
 }

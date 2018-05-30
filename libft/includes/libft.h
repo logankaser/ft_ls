@@ -189,6 +189,20 @@ typedef	struct		s_fileinfo
 void				ft_qsort(void *array[], int size, t_compare pred);
 
 /*
+** Dynamic String.
+*/
+
+typedef struct		s_string {
+	char			*content;
+	size_t 			length;
+	size_t			capacity;
+}					t_string;
+
+void				ft_string_init(t_string *s);
+size_t				ft_string_append(t_string *s, char *add);
+size_t				ft_string_appendn(t_string *s, char *add, size_t len);
+
+/*
 ** Printf
 */
 

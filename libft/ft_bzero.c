@@ -24,5 +24,5 @@ void	ft_bzero(void *m, size_t n)
 	n /= 8;
 	b64 = m;
 	while (n)
-		b8[n--] = 0;
+		b64[--n] = 0;
 }
