@@ -23,7 +23,7 @@ DEP = $(OBJ:%.o=%.d)
 
 CPPFLAGS = -Wall -Wextra -Werror \
 -I libft/includes \
--g -Ofast -march=native \
+-g -O3 -march=native \
 #-fsanitize=address -fsanitize=undefined
 
 LDFLAGS = -L libft -lft \

@@ -194,7 +194,7 @@ void				ft_qsort(void *array[], int size, t_compare pred);
 
 typedef struct		s_string {
 	char			*content;
-	size_t 			length;
+	size_t			length;
 	size_t			capacity;
 }					t_string;
 

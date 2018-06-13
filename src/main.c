@@ -90,7 +90,7 @@ static void			print_files(t_vector files,
 		}
 		else
 			ft_printf("%s\t", file->name);
-		(S_ISDIR(file->meta.st_mode) && opts['R']) && ft_lstpush(dirs, file->path, 0);
+		(S_ISDIR(file->meta.st_mode) && opts['R']) && pushdir(dirs, file->path);
 	}
 	ft_vector_rm(&files);
 	!opts['l'] && write(1, "\n", 1);
@@ -105,10 +105,7 @@ static void			iter_dir(const char *path, t_list **dirs, uint8_t opts[])
 
 	ft_vector_init(&ls);
 	if (!(pwd = opendir(path)))
-	{
-		perror("ft_ls");
-		return ;
-	}
+		return (perror("ft_ls"));
 	blocks = 0;
 	while ((info = readdir(pwd)))
 	{

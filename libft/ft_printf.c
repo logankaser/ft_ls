@@ -58,7 +58,7 @@
 **.
 */
 
-static void	parse_specifiers(t_printf *pf, char **f)
+static void		parse_specifiers(t_printf *pf, char **f)
 {
 	MATCH(**f == 'C' || (**f == 'c' && pf->len == l_l),
 		pf->type = t_wchar);
@@ -79,7 +79,7 @@ static void	parse_specifiers(t_printf *pf, char **f)
 		++*f;
 }
 
-unsigned	read_num(char **f)
+unsigned		read_num(char **f)
 {
 	unsigned	num;
 
@@ -93,7 +93,7 @@ unsigned	read_num(char **f)
 	return (num);
 }
 
-static void	format_parse(char **f, va_list args, t_string *s)
+static void		format_parse(char **f, va_list args, t_string *s)
 {
 	t_printf	pf;
 
@@ -146,10 +146,10 @@ static t_string	format_iter(char *f, va_list args)
 			d += f[d] != 0;
 	}
 	ft_string_appendn(&s, f, d);
-	return	(s);
+	return (s);
 }
 
-int			ft_printf(char *format, ...)
+int				ft_printf(char *format, ...)
 {
 	va_list		args;
 	t_string	s;

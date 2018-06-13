@@ -10,16 +10,18 @@ void		ft_string_init(t_string *s)
 
 size_t		ft_string_append(t_string *s, char *add)
 {
-	size_t len;
+	size_t	len;
+	char	*new;
 
 	len = ft_strlen(add);
 	if (len < 1)
-		return 0;
+		return (0);
 	if (len > s->capacity - s->length)
 	{
-		char* new = calloc(((s->length + len) * 2) + 1, 1);
+		new = malloc(((s->length + len) * 2) + 1);
+		ft_bzero(new, (s->length + len) * 2 + 1);
 		if (!new)
-			return 0;
+			return (0);
 		s->capacity = (s->length + len) * 2;
 		ft_memcpy(new, s->content, s->length);
 		free(s->content);
@@ -32,13 +34,16 @@ size_t		ft_string_append(t_string *s, char *add)
 
 size_t		ft_string_appendn(t_string *s, char *add, size_t len)
 {
+	char	*new;
+
 	if (len < 1)
-		return 0;
+		return (0);
 	if (len > s->capacity - s->length)
 	{
-		char* new = calloc(((s->length + len) * 2) + 1, 1);
+		new = malloc(((s->length + len) * 2) + 1);
+		ft_bzero(new, (s->length + len) * 2 + 1);
 		if (!new)
-			return 0;
+			return (0);
 		s->capacity = (s->length + len) * 2;
 		ft_memcpy(new, s->content, s->length);
 		free(s->content);

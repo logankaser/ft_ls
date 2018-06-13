@@ -95,7 +95,7 @@ format
 SRC = $(addsuffix .c, $(LIST))
 OBJ = $(addsuffix .o, $(LIST))
 
-CFLAGS = -g -Ofast -march=native -Wall -Wextra -Werror -I includes/
+CFLAGS = -g -O3 -march=native -Wall -Wextra -Werror -I includes/
 
 all: $(NAME)
 

@@ -70,7 +70,7 @@ static char			*wchar_to_str(wchar_t wc)
 
 	ft_bzero(str, 8);
 	*((wchar_t *)str) = wc;
-	return str;
+	return (str);
 }
 
 static char			*char_to_str(int c)
@@ -79,14 +79,13 @@ static char			*char_to_str(int c)
 
 	ft_bzero(str, 8);
 	*((int*)str) = c;
-	return str;
+	return (str);
 }
-
 
 void				format_print(t_printf pf, t_string *s)
 {
 	uintmax_t	nbr;
-	char 		*str;
+	char		*str;
 
 	nbr = pf.type >= t_ptr ? apply_length(pf) : 0;
 	MATCH(pf.type == t_wstr, str = ft_wchar_utf8(pf.data.wstr));
