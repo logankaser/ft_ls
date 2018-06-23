@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strprepend.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkaser <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lkaser <lkaser@student.42.us.org           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 20:38:49 by lkaser            #+#    #+#             */
 /*   Updated: 2017/12/30 16:23:46 by lkaser           ###   ########.fr       */

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstpush.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkaser <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lkaser <lkaser@student.42.us.org           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 19:50:45 by lkaser            #+#    #+#             */
 /*   Updated: 2017/10/30 18:18:34 by lkaser           ###   ########.fr       */

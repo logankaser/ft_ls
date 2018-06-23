@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utoa_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkaser <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lkaser <lkaser@student.42.us.org           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 14:38:16 by lkaser            #+#    #+#             */
 /*   Updated: 2017/12/30 16:22:09 by lkaser           ###   ########.fr       */

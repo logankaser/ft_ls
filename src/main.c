@@ -53,7 +53,12 @@ static char			*perms(unsigned mode)
 	static char	p[11];
 
 	ft_strcpy(p, "----------");
-	S_ISDIR(mode) && (p[0] = 'd');
+	MATCH(S_ISDIR(mode), p[0] = 'd');
+	OR(S_ISBLK(mode), p[0] = 'b');
+	OR(S_ISCHR(mode), p[0] = 'c');
+	OR(S_ISFIFO(mode), p[0] = 'p');
+	OR(S_ISLNK(mode), p[0] = 'l');
+	OR(S_ISSOCK(mode), p[0] = 's');
 	mode & S_IRUSR && (p[1] = 'r');
 	mode & S_IWUSR && (p[2] = 'w');
 	mode & S_IXUSR && (p[3] = 'x');
@@ -63,6 +68,12 @@ static char			*perms(unsigned mode)
 	mode & S_IROTH && (p[7] = 'r');
 	mode & S_IWOTH && (p[8] = 'w');
 	mode & S_IXOTH && (p[9] = 'x');
+	if (mode & S_ISUID)
+		p[3] = (mode & S_IXUSR) ? 's' : 'S';
+	if (mode & S_ISGID)
+		p[6] = (mode & S_IXGRP) ? 's' : 'l';
+	if (mode & S_ISVTX)
+		p[9] = (mode & S_IXOTH) ? 't' : 'T';
 	return (p);
 }
 
@@ -90,9 +101,9 @@ static void			print_files(t_vector files,
 		}
 		else
 			ft_printf("%s\t", file->name);
-		(S_ISDIR(file->meta.st_mode) && opts['R']) && pushdir(dirs, file->path);
+		((opts['R'] && S_ISDIR(file->meta.st_mode)) &&
+			add_dir(dirs, file, g_sorts[opts['t']][opts['r']])) || 0, free(file);
 	}
-	ft_vector_rm(&files);
 	!opts['l'] && write(1, "\n", 1);
 }
 

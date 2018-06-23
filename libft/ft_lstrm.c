@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstrm.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkaser <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lkaser <lkaser@student.42.us.org           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/12 13:47:45 by lkaser            #+#    #+#             */
 /*   Updated: 2017/10/30 14:36:56 by lkaser           ###   ########.fr       */

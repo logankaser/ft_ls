@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str_has_only.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkaser <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lkaser <lkaser@student.42.us.org           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 13:47:41 by lkaser            #+#    #+#             */
 /*   Updated: 2017/11/15 14:47:05 by lkaser           ###   ########.fr       */

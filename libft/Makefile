@@ -11,7 +11,8 @@
 
 
 NAME = libft.a
-LIST = ft_atoi \
+LIST = ft_atof \
+ft_atoi \
 ft_bzero \
 ft_in_range \
 ft_isalnum \
@@ -95,7 +96,7 @@ format
 SRC = $(addsuffix .c, $(LIST))
 OBJ = $(addsuffix .o, $(LIST))
 
-CFLAGS = -g -O3 -march=native -Wall -Wextra -Werror -I includes/
+CPPFLAGS = -g -flto -O3 -march=native -Wall -Wextra -Werror -I includes/
 
 all: $(NAME)
 
@@ -104,7 +105,7 @@ $(NAME): $(OBJ)
 	@printf "\e[32;1mlibft.a Created\e[0m\n"
 
 $(OBJ): $(SRC)
-	@gcc $(CFLAGS) -c $(SRC)
+	@gcc $(CPPFLAGS) -c $(SRC)
 
 clean:
 	@rm -f $(OBJ)

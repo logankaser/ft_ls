@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putmem.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkaser <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lkaser <lkaser@student.42.us.org           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/18 15:01:52 by lkaser            #+#    #+#             */
 /*   Updated: 2017/09/22 16:05:20 by lkaser           ###   ########.fr       */

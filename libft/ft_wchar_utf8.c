@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_wchar_utf8.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkaser <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lkaser <lkaser@student.42.us.org           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 13:37:38 by lkaser            #+#    #+#             */
 /*   Updated: 2017/12/30 16:34:35 by lkaser           ###   ########.fr       */

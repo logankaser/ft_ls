@@ -6,7 +6,7 @@
 /*   By: lkaser <lkaser@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/18 11:03:56 by lkaser            #+#    #+#             */
-/*   Updated: 2018/05/25 18:17:50 by lkaser           ###   ########.fr       */
+/*   Updated: 2018/06/20 22:07:55 by lkaser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@
 # define OTHERWISE(a) else a
 # define FT_ITOA_BASE(nbr, base) ft_itoa_base(nbr, base, sizeof base - 1)
 # define FT_UTOA_BASE(nbr, base) ft_utoa_base(nbr, base, sizeof base - 1)
-# define ZERO(z) z = {0}
+# define TRUE (1)
+# define FALSE (0)
 
 /*
 ** Memory.
@@ -67,6 +68,7 @@ char				*ft_wchar_utf8(wchar_t *wc);
 int					ft_strcmp(const char *a, const char *b);
 int					ft_strncmp(const char *a, const char *b, size_t size);
 int					ft_atoi(const char *str);
+double				ft_atof(const char *str);
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
 int					ft_isalnum(int c);

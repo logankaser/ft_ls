@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_in_range.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkaser <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lkaser <lkaser@student.42.us.org           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 13:47:41 by lkaser            #+#    #+#             */
 /*   Updated: 2017/11/16 14:06:08 by lkaser           ###   ########.fr       */

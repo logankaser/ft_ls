@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstrarray.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkaser <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lkaser <lkaser@student.42.us.org           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/22 14:22:33 by lkaser            #+#    #+#             */
 /*   Updated: 2017/09/22 15:55:53 by lkaser           ###   ########.fr       */

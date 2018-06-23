@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putintarray.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkaser <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lkaser <lkaser@student.42.us.org           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/22 14:22:33 by lkaser            #+#    #+#             */
 /*   Updated: 2017/09/22 15:56:15 by lkaser           ###   ########.fr       */

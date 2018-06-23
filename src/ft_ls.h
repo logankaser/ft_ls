@@ -31,5 +31,7 @@ t_bool				sort_ascii(const void *a, const void *b);
 t_bool				sort_ascii_r(const void *a, const void *b);
 t_bool				sort_time(const void *a, const void *b);
 t_bool				sort_time_r(const void *a, const void *b);
+t_list				*add_dir(t_list **dirs, void *dir_path,
+					t_bool (*comp)(const void *, const void *));
 
 #endif
