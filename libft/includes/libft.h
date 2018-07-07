@@ -6,7 +6,7 @@
 /*   By: lkaser <lkaser@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/18 11:03:56 by lkaser            #+#    #+#             */
-/*   Updated: 2018/06/20 22:07:55 by lkaser           ###   ########.fr       */
+/*   Updated: 2018/07/06 20:31:03 by lkaser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,20 @@ void				ft_vector_push(t_vector *v, void *d);
 void				ft_vector_rm(t_vector *v);
 
 /*
+** Dynamic String.
+*/
+
+typedef struct		s_string {
+	char			*content;
+	size_t			length;
+	size_t			capacity;
+}					t_string;
+
+void				ft_string_init(t_string *s);
+size_t				ft_string_append(t_string *s, char *add);
+size_t				ft_string_appendn(t_string *s, char *add, size_t len);
+
+/*
 ** Pair.
 */
 
@@ -191,21 +205,7 @@ typedef	struct		s_fileinfo
 void				ft_qsort(void *array[], int size, t_compare pred);
 
 /*
-** Dynamic String.
-*/
-
-typedef struct		s_string {
-	char			*content;
-	size_t			length;
-	size_t			capacity;
-}					t_string;
-
-void				ft_string_init(t_string *s);
-size_t				ft_string_append(t_string *s, char *add);
-size_t				ft_string_appendn(t_string *s, char *add, size_t len);
-
-/*
-** Printf
+** Printf.
 */
 
 int					ft_printf(char *format, ...);

@@ -20,10 +20,12 @@
 
 # define FILE(x) ((t_file*)x)
 
+# define USAGE "ft_ls: illegal option -%c, usage: ft_ls [-Ralrt1] [file ...]\n"
+
 typedef struct		s_file
 {
-	char			name[NAME_MAX + 1];
 	char			*path;
+	char			*name;
 	struct stat		meta;
 }					t_file;
 
@@ -31,7 +33,8 @@ t_bool				sort_ascii(const void *a, const void *b);
 t_bool				sort_ascii_r(const void *a, const void *b);
 t_bool				sort_time(const void *a, const void *b);
 t_bool				sort_time_r(const void *a, const void *b);
-t_list				*add_dir(t_list **dirs, void *dir_path,
+int					add_dir_sorted(t_list **dirs, t_file *dir,
 					t_bool (*comp)(const void *, const void *));
+void				iter_dir(const char *path, t_list **dirs, int8_t opts[]);
 
 #endif

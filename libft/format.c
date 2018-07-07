@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   format.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkaser <lkaser@student.42.us.org           +#+  +:+       +#+        */
+/*   By: lkaser <lkaser@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/21 16:08:47 by lkaser            #+#    #+#             */
-/*   Updated: 2017/12/30 16:09:29 by lkaser           ###   ########.fr       */
+/*   Created: 2018/07/06 20:20:56 by lkaser            #+#    #+#             */
+/*   Updated: 2018/07/06 20:20:59 by lkaser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static char			*wchar_to_str(wchar_t wc)
 {
 	static char str[8];
 
-	ft_bzero(str, 8);
+	*((uint64_t*)str) = 0;
 	*((wchar_t *)str) = wc;
 	return (str);
 }
@@ -77,7 +77,7 @@ static char			*char_to_str(int c)
 {
 	static char str[8];
 
-	ft_bzero(str, 8);
+	*((uint64_t*)str) = 0;
 	*((int*)str) = c;
 	return (str);
 }
@@ -91,14 +91,14 @@ void				format_print(t_printf pf, t_string *s)
 	MATCH(pf.type == t_wstr, str = ft_wchar_utf8(pf.data.wstr));
 	OR(pf.type == t_wchar, str = wchar_to_str(pf.data.wc));
 	OR(pf.type == t_str, str = pf.data.str);
-	OR(pf.type == t_char, char_to_str(pf.data.i));
+	OR(pf.type == t_char, str = char_to_str(pf.data.i));
 	OR(pf.type == t_int, str = FT_ITOA_BASE(nbr, "0123456789"));
 	OR(pf.type == t_uint, str = FT_UTOA_BASE(nbr, "0123456789"));
 	OR(pf.type == t_hex, str = FT_UTOA_BASE(nbr, "0123456789abcdef"));
 	OR(pf.type == t_ptr, str = FT_UTOA_BASE(pf.data.p, "0123456789abcdef"));
 	OR(pf.type == t_hex_up, str = FT_UTOA_BASE(nbr, "0123456789ABCDEF"));
 	OR(pf.type == t_octal, str = FT_UTOA_BASE(nbr, "01234567"));
-	if (pf.type && !(pf.type == t_char && !pf.len))
+	if (pf.type)
 	{
 		if (pf.type > t_wstr)
 			handle_flags(pf, &str, nbr);

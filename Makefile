@@ -11,12 +11,11 @@
 # **************************************************************************** #
 
 NAME = ft_ls
-LIST = main sort
+LIST = main ft_ls sort
 
 SRC_DIR = src
 OBJ_DIR = obj
 
-SRC = $(addsuffix .c, $(addprefix src/, $(LIST)))
 OBJ = $(addsuffix .o, $(addprefix $(OBJ_DIR)/, $(LIST)))
 DEP = $(OBJ:%.o=%.d)
 CC = clang
@@ -24,7 +23,7 @@ SUB = libft
 
 CPPFLAGS = -Wall -Wextra -Werror \
 -I libft/includes -I libmlx \
--O3 -march=native -flto \
+-O3 -flto -march=native \
 #-g -fsanitize=address -fsanitize=undefined
 
 LDFLAGS = -flto -L libft -lft \
@@ -63,7 +62,7 @@ fclean:
 	do\
 		make -sC $$s fclean;\
 	done
-	@printf "\e[31;1mFull Cleaning..\e[0m\n"
+	@printf "\e[31;1mFull Cleaning %s..\e[0m\n" $(NAME)
 	@rm -rf $(OBJ_DIR)
 	@rm -f $(NAME)
 	@rm -rf $(NAME).dSYM

@@ -1,4 +1,4 @@
-t_bool (*comp)(const void *, const void *)/* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
@@ -32,8 +32,26 @@ t_bool	sort_time_r(const void *a, const void *b)
 	return (FILE(a)->meta.st_mtime > FILE(b)->meta.st_mtime);
 }
 
-t_list	*add_dir(t_list **dirs, void *dir_path,
+int		add_dir_sorted(t_list **dirs, t_file *dir,
 		t_bool (*comp)(const void *, const void *))
 {
-	return 0;
+	t_list *new;
+	t_list *walk;
+
+	if (!ft_strcmp(dir->name, ".") || !ft_strcmp(dir->name, "..")
+		|| !(new = ft_lstnew(dir, sizeof(t_file))))
+		return (0);
+	if (!*dirs || comp((*dirs)->content, new->content)
+		|| !comp(dir, (*dirs)->content))
+	{
+		new->next = *dirs;
+		*dirs = new;
+		return (1);
+	}
+	walk = *dirs;
+	while (walk->next && comp(new->content, walk->next->content))
+		walk = walk->next;
+	new->next = walk->next;
+	walk->next = new;
+	return (1);
 }

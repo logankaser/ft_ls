@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkaser <lkaser@student.42.us.org           +#+  +:+       +#+        */
+/*   By: lkaser <lkaser@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/21 17:38:19 by lkaser            #+#    #+#             */
-/*   Updated: 2017/11/01 16:12:00 by lkaser           ###   ########.fr       */
+/*   Created: 2018/07/06 20:22:46 by lkaser            #+#    #+#             */
+/*   Updated: 2018/07/06 20:22:47 by lkaser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_list	*ft_lstnew(void const *content, size_t size)
 	}
 	else
 	{
-		NULL_GUARD(new->content = malloc(size));
+		new->content = malloc(size);
 		if (!new->content)
 		{
 			free(new);
